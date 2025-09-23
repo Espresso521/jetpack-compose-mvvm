@@ -1,6 +1,7 @@
 package com.kotaku.mvvm.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import com.kotaku.mvvm.ui.screen.DetailScreen
 import com.kotaku.mvvm.ui.screen.HomeScreen
 import com.kotaku.mvvm.ui.screen.LoginScreen
 import com.kotaku.mvvm.ui.screen.SplashScreen
+import com.kotaku.mvvm.vm.HomeViewModel
 import com.kotaku.mvvm.vm.WordsViewModel
 
 object Routes {
@@ -25,7 +27,8 @@ object Routes {
 
 @Composable
 fun AppNav(
-    vm: WordsViewModel = hiltViewModel(),
+    wordsVm: WordsViewModel = hiltViewModel(),
+    homeVm: HomeViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
     val nav = rememberNavController()
@@ -52,14 +55,33 @@ fun AppNav(
         }
 
         composable(Routes.Home) {
+            LaunchedEffect(Unit) {
+                homeVm.events.collect { ev ->
+                    when (ev) {
+                        HomeViewModel.Event.Logout -> {
+                            nav.navigate(Routes.Login) {
+                                popUpTo(Routes.Home) { inclusive = true }
+                                launchSingleTop = true
+                            }
+                        }
+                    }
+                }
+            }
+
             HomeScreen(
-                vm = vm,
-                onOpenDetail = { id -> nav.navigate("detail/$id") }
+                wordsVm = wordsVm,
+                // 打开详情页：跳转路由并携带 id
+                onOpenDetail = { id ->
+                    nav.navigate("${Routes.Detail}/$id")
+                },
+                // 登出：清理登录态并回到登录页
+                onLogout = { homeVm.logout() },
+                iconsOnly = true    // 底部栏仅显示图标
             )
         }
 
         composable(
-            route = Routes.Detail,
+            route = "${Routes.Detail}/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id") ?: return@composable
