@@ -58,4 +58,10 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.material3)
     implementation(libs.compose.ui.tooling.preview)
+    // Activity Compose
+    implementation(libs.activity.compose)
+    // Navigation
+    implementation(libs.navigation.compose)
+    // ViewModel for Compose
+    implementation(libs.lifecycle.viewmodel.compose)
 }
