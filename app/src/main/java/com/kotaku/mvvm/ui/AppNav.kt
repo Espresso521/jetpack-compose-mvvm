@@ -1,7 +1,10 @@
 package com.kotaku.mvvm.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
@@ -17,7 +20,7 @@ object Routes {
 
 @Composable
 fun AppNav(
-    vm: WordsViewModel,
+    vm: WordsViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
     val nav = rememberNavController()
@@ -52,11 +55,13 @@ fun AppNav(
 
         composable(
             route = Routes.Detail,
-            arguments = listOf(navArgument("id"){ type = NavType.IntType })
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id") ?: return@composable
+            val vm: WordsViewModel = hiltViewModel()
+            val word by vm.wordFlow(id).collectAsState(initial = null)
             DetailScreen(
-                word = vm.getById(id),
+                word = word,
                 onToggleFavorite = { vm.toggleFavorite(id) }
             )
         }

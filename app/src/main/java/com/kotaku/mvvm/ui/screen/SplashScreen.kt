@@ -11,7 +11,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(onFinished: (Boolean) -> Unit) {
     LaunchedEffect(Unit) {
-        delay(1200)
+        delay(500)
         onFinished(false) // demo：假装未登录；实际可读本地登录态
     }
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

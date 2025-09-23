@@ -1,31 +1,38 @@
 package com.kotaku.mvvm.vm
 
 import androidx.lifecycle.ViewModel
-import com.kotaku.mvvm.data.WordRepository
+import androidx.lifecycle.viewModelScope
+import com.kotaku.mvvm.db.WordDao
 import com.kotaku.mvvm.model.Word
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-class WordsViewModel(
-    private val repo: WordRepository = WordRepository()
+@HiltViewModel
+class WordsViewModel @Inject constructor(
+    private val dao: WordDao
 ) : ViewModel() {
 
-    private val _words = MutableStateFlow(repo.loadAll())
-    val words: StateFlow<List<Word>> = _words
+    val words = dao.getAll().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
 
-    fun toggleFavorite(id: Int) {
-        _words.update { list ->
-            list.map { w -> if (w.id == id) w.copy(isFavorite = !w.isFavorite) else w }
+    /** Detail 用：按 id 观察单条 */
+    fun wordFlow(id: Int) = dao.observeById(id)
+
+    /** Detail 用：按 id 切换收藏 */
+    fun toggleFavorite(id: Int) = viewModelScope.launch {
+        dao.getById(id)?.let { current ->
+            dao.update(current.copy(isFavorite = !current.isFavorite))
         }
     }
 
-    fun getById(id: Int): Word? = _words.value.firstOrNull { it.id == id }
-
-    val favorites: StateFlow<List<Word>> get() =
-        MutableStateFlow(_words.value.filter { it.isFavorite })
-            .also { flow ->
-                // 简单方式：每次读时刷新（小项目OK；正式项目建议用 combine/map）
-                flow.value = _words.value.filter { it.isFavorite }
-            }
+    /** 如果你仍想保留原版 */
+    fun toggleFavorite(word: Word) = viewModelScope.launch {
+        dao.update(word.copy(isFavorite = !word.isFavorite))
+    }
 }
