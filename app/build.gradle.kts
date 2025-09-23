@@ -94,4 +94,6 @@ dependencies {
     //Timber
     implementation(libs.timber)
     implementation("org.jetbrains.kotlin:kotlin-metadata-jvm:2.2.20")
+
+    implementation(libs.accompanist.systemuicontroller)
 }

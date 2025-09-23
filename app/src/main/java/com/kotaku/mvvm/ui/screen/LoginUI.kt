@@ -32,6 +32,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +53,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kotaku.mvvm.R
 import com.kotaku.mvvm.ui.ComposableRiveAnimationView
 import com.kotaku.mvvm.ui.theme.P2PBackground
@@ -78,6 +80,16 @@ fun LoginUI(onLoginSuccess: () -> Unit) {
     var isCheckingJob: Job? = null // Initialize isCheckingJob
     var trigSuccess by remember { mutableStateOf(false) }
     var trigFail by remember { mutableStateOf(false) }
+
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.setStatusBarColor(
+            color = Color(0xFFd7e1e8),
+            darkIcons = false
+        )
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -123,7 +135,10 @@ fun LoginUI(onLoginSuccess: () -> Unit) {
                         if (trigSuccess) {
                             Timber.d("huze:: trigSuccess")
                             view.fireState("Login Machine", "trigSuccess")
-                            onLoginSuccess()
+                            CoroutineScope(Dispatchers.Main).launch {
+                                delay(2000)
+                                onLoginSuccess()
+                            }
                         }
                     }
                 }

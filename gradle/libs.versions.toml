@@ -24,6 +24,7 @@ roomExternalAntlr = "2.8.0"
 materialIcons = "1.7.8"
 startupRuntime = "1.1.1"
 timber = "5.0.1"
+accompanist = "0.30.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,7 +62,7 @@ compose-material-icons-extended = { group = "androidx.compose.material", name = 
 androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "startupRuntime" }
 
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
-
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

@@ -6,9 +6,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.kotaku.mvvm.ui.screen.*
+import com.kotaku.mvvm.ui.screen.DetailScreen
+import com.kotaku.mvvm.ui.screen.HomeScreen
+import com.kotaku.mvvm.ui.screen.LoginScreen
+import com.kotaku.mvvm.ui.screen.SplashScreen
 import com.kotaku.mvvm.vm.WordsViewModel
 
 object Routes {
