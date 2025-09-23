@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.kotaku.mvvm.R
+import com.kotaku.mvvm.ui.screen.DetailMedia
 import com.kotaku.mvvm.ui.screen.DetailScreen
 import com.kotaku.mvvm.ui.screen.HomeScreen
 import com.kotaku.mvvm.ui.screen.LoginScreen
@@ -89,7 +91,9 @@ fun AppNav(
             val word by wordsVm.wordFlow(id).collectAsState(initial = null)
             DetailScreen(
                 word = word,
-                onToggleFavorite = { wordsVm.toggleFavorite(id) }
+                onBack = { nav.popBackStack() },
+                onToggleFavorite = { wordsVm.toggleFavorite(id) },
+                media = DetailMedia.Rive(R.raw.car)
             )
         }
     }
