@@ -76,7 +76,7 @@ fun AppNav(
                 },
                 // 登出：清理登录态并回到登录页
                 onLogout = { homeVm.logout() },
-                iconsOnly = true    // 底部栏仅显示图标
+                iconsOnly = false    // 底部栏仅显示图标
             )
         }
 
