@@ -5,11 +5,13 @@ import androidx.annotation.RawRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -88,12 +90,13 @@ fun DetailScreen(
                 icon = {
                     Icon(
                         imageVector = Icons.Filled.Favorite,
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = if (word.isFavorite) Color.Red else MaterialTheme.colorScheme.onPrimary
                     )
                 },
                 text = { Text(if (word.isFavorite) "お気に入り解除" else "お気に入り") },
-                containerColor = Color(0xFF4483D1),         // FAB 改为蓝色
-                contentColor = cs.onPrimary,         // 文字/图标颜色
+                containerColor = topBarColor,
+                contentColor = cs.onPrimary,
                 elevation = FloatingActionButtonDefaults.elevation(
                     defaultElevation = 6.dp, pressedElevation = 8.dp
                 )
@@ -106,15 +109,12 @@ fun DetailScreen(
                 .fillMaxSize()
                 .verticalScroll(scroll)
         ) {
-            // ===== 媒体区：用卡片区分背景 =====
             if (media != null) {
                 Card(
                     modifier = Modifier
                         .padding(horizontal = 10.dp, vertical = 8.dp)
                         .fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = cs.secondaryContainer
-                    ),
+                    colors = CardDefaults.cardColors(containerColor = cs.secondaryContainer),
                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                     shape = MaterialTheme.shapes.large
                 ) {
@@ -145,7 +145,6 @@ fun DetailScreen(
                 }
             }
 
-            // ===== 详情区：保持原样，但与上方色块形成对比 =====
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -159,34 +158,59 @@ fun DetailScreen(
                 Divider()
                 Spacer(Modifier.height(12.dp))
 
+                // ==== 意味 ====
                 Text(
                     text = "意味",
-                    style = MaterialTheme.typography.titleSmall,
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                     color = cs.primary
                 )
                 Spacer(Modifier.height(6.dp))
                 Text(text = word.meaning, style = MaterialTheme.typography.bodyLarge)
 
+                // ==== 例文 ====
                 val hasEn = word.exampleEn.isNotBlank()
                 val hasJa = word.exampleJa.isNotBlank()
                 if (hasEn || hasJa) {
                     Spacer(Modifier.height(16.dp))
                     Divider()
                     Spacer(Modifier.height(12.dp))
+
                     Text(
                         text = "例文",
-                        style = MaterialTheme.typography.titleSmall,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                         color = cs.primary
                     )
-                    Spacer(Modifier.height(6.dp))
+                    Spacer(Modifier.height(8.dp))
+
                     if (hasEn) {
-                        Text("EN：${word.exampleEn}", style = MaterialTheme.typography.bodyLarge)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("🇺🇸", fontSize = MaterialTheme.typography.bodyLarge.fontSize)
+                            Spacer(Modifier.width(8.dp))
+                            Text(
+                                text = word.exampleEn,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
                         Spacer(Modifier.height(8.dp))
                     }
                     if (hasJa) {
-                        Text("JA：${word.exampleJa}", style = MaterialTheme.typography.bodyLarge)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("🇯🇵", fontSize = MaterialTheme.typography.bodyLarge.fontSize)
+                            Spacer(Modifier.width(8.dp))
+                            Text(
+                                text = word.exampleJa,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
                     }
                 }
+
                 Spacer(Modifier.height(96.dp))
             }
         }
