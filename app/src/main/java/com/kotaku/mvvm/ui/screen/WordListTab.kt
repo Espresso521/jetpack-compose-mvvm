@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.kotaku.mvvm.model.Word
+import timber.log.Timber
 
 @Composable
 fun WordListTab(
@@ -27,6 +28,7 @@ fun WordListTab(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(vertical = 8.dp)
     ) {
+        Timber.d("WordListTab:: words size = ${words.size}")
         items(words, key = { it.id }) { w ->
             ListItem(
                 headlineContent = { Text(w.term) },

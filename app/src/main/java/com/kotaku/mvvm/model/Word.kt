@@ -8,6 +8,7 @@ data class Word(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val term: String,
     val meaning: String,
-    val example: String,
+    val exampleEn: String,
+    val exampleJa: String,
     val isFavorite: Boolean = false
 )
