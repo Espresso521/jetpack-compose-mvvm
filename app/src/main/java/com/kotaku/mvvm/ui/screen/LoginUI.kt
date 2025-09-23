@@ -31,6 +31,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -53,6 +54,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kotaku.mvvm.R
 import com.kotaku.mvvm.ui.ComposableRiveAnimationView
@@ -60,6 +62,7 @@ import com.kotaku.mvvm.ui.theme.P2PBackground
 import com.kotaku.mvvm.ui.theme.TextColor
 import com.kotaku.mvvm.ui.theme.TipTextColor
 import com.kotaku.mvvm.ui.theme.monteSB
+import com.kotaku.mvvm.vm.LoginViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -68,7 +71,10 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @Composable
-fun LoginUI(onLoginSuccess: () -> Unit) {
+fun LoginUI(
+    onLoginSuccess: () -> Unit,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
     var password by remember {
         mutableStateOf(TextFieldValue(""))
     }
@@ -82,6 +88,10 @@ fun LoginUI(onLoginSuccess: () -> Unit) {
     var trigFail by remember { mutableStateOf(false) }
 
     val systemUiController = rememberSystemUiController()
+
+    LaunchedEffect(Unit) {
+        viewModel.navigateToHome.collect { onLoginSuccess() }
+    }
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -135,10 +145,7 @@ fun LoginUI(onLoginSuccess: () -> Unit) {
                         if (trigSuccess) {
                             Timber.d("huze:: trigSuccess")
                             view.fireState("Login Machine", "trigSuccess")
-                            CoroutineScope(Dispatchers.Main).launch {
-                                delay(2000)
-                                onLoginSuccess()
-                            }
+                            viewModel.triggerSuccessWithDelay()
                         }
                     }
                 }
