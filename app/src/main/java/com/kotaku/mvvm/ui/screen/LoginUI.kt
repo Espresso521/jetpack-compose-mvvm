@@ -234,8 +234,7 @@ fun LoginUI(
                     Spacer(modifier = Modifier.height(30.dp))
                     Button(
                         onClick = {
-                            Timber.d("huze:: ${password.text} - ${email.text}")
-                            if (password.text == "123456" && email.text == "kotaku20220424@gmail.com") {
+                            if (password.text == "123" && email.text == "kotaku20220424@gmail.com") {
                                 trigSuccess = true
                                 trigFail = false
                             } else {
