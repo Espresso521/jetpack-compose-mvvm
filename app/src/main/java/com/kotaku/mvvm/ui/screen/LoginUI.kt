@@ -205,6 +205,7 @@ fun LoginUI(
                         icon = Icons.Filled.Email,
                         mutableText = email,
                         onValueChanged = {
+                            trigFail = false
                             email = it
                         },
                         keyboardType = KeyboardType.Email,
@@ -217,6 +218,7 @@ fun LoginUI(
                         icon = Icons.Filled.Lock,
                         mutableText = password,
                         onValueChanged = {
+                            trigFail = false
                             password = it
                             if (isCheckingJob?.isActive == true) {
                                 isCheckingJob?.cancel()
@@ -229,7 +231,10 @@ fun LoginUI(
                         },
                         keyboardType = KeyboardType.Password,
                         imeAction = ImeAction.Next,
-                        passwordVisible = passwordVisible
+                        passwordVisible = passwordVisible,
+                        onPasswordToggle = {
+                            trigFail = false
+                        }
                     )
                     Spacer(modifier = Modifier.height(30.dp))
                     Button(
@@ -303,6 +308,7 @@ fun TextFieldWithIcons(
     imeAction: ImeAction,
     passwordVisible: MutableState<Boolean> = mutableStateOf(false),
     onValueChanged: (TextFieldValue) -> Unit,
+    onPasswordToggle: (Boolean) -> Unit = {}
 ) {
     if (keyboardType == KeyboardType.Password) {
         TextField(
@@ -322,7 +328,11 @@ fun TextFieldWithIcons(
                 // Please provide localized description for accessibility services
                 val description = if (passwordVisible.value) "Hide password" else "Show password"
 
-                IconButton(onClick = { passwordVisible.value = !passwordVisible.value }) {
+                IconButton(onClick = {
+                    val newVisible = !passwordVisible.value
+                    passwordVisible.value = newVisible
+                    onPasswordToggle(newVisible)
+                }) {
                     Icon(imageVector = image, description, tint = Color(0xFF4483D1))
                 }
             },
