@@ -22,7 +22,8 @@ object Routes {
     const val Splash = "splash"
     const val Login = "login"
     const val Home = "home"
-    const val Detail = "detail/{id}"
+    const val Detail = "detail"
+    fun detail(id: Int) = "$Detail/$id"
 }
 
 @Composable
@@ -85,11 +86,10 @@ fun AppNav(
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id") ?: return@composable
-            val vm: WordsViewModel = hiltViewModel()
-            val word by vm.wordFlow(id).collectAsState(initial = null)
+            val word by wordsVm.wordFlow(id).collectAsState(initial = null)
             DetailScreen(
                 word = word,
-                onToggleFavorite = { vm.toggleFavorite(id) }
+                onToggleFavorite = { wordsVm.toggleFavorite(id) }
             )
         }
     }
