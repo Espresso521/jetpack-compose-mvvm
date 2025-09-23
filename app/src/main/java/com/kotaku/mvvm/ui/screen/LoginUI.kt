@@ -145,7 +145,7 @@ fun LoginUI(
                         if (trigSuccess) {
                             Timber.d("huze:: trigSuccess")
                             view.fireState("Login Machine", "trigSuccess")
-                            viewModel.triggerSuccessWithDelay()
+                            viewModel.onLoginSuccess()
                         }
                     }
                 }

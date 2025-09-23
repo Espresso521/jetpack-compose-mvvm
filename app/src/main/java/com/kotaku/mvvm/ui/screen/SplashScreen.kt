@@ -9,13 +9,18 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kotaku.mvvm.R
 import com.kotaku.mvvm.ui.ComposableRiveAnimationView
+import com.kotaku.mvvm.vm.SplashViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(onFinished: (Boolean) -> Unit) {
+fun SplashScreen(
+    onFinished: (Boolean) -> Unit,
+    vm: SplashViewModel = hiltViewModel()
+) {
     val systemUiController = rememberSystemUiController()
 
     SideEffect {
@@ -27,7 +32,7 @@ fun SplashScreen(onFinished: (Boolean) -> Unit) {
 
     LaunchedEffect(Unit) {
         delay(3000)
-        onFinished(false)
+        onFinished(vm.decideLoggedIn())
     }
 
     Box(
