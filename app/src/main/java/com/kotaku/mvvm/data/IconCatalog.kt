@@ -52,98 +52,105 @@ import androidx.compose.material.icons.filled.Train
 import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.filled.Work
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.kotaku.mvvm.R
 import com.kotaku.mvvm.model.Word
+import com.kotaku.mvvm.ui.screen.DetailMedia
 
 object IconCatalog {
-    val wordIconMap: Map<String, ImageVector> = mapOf(
-        // A
-        "airplane" to Icons.Default.Flight,
 
-        // B
-        "bag" to Icons.Default.Work,
-        "book" to Icons.Default.MenuBook,
-        "bus" to Icons.Default.DirectionsBus,
-
-        // C
-        "cake" to Icons.Default.Cake,
-        "car" to Icons.Default.DirectionsCar,
-        "chair" to Icons.Default.EventSeat,
-        "child" to Icons.Default.ChildCare,
-        "coffee" to Icons.Default.LocalCafe,
-        "computer" to Icons.Default.Computer,
-
-        // D
-        "day" to Icons.Default.Today,
-        "doctor" to Icons.Default.MedicalServices,
-        "dog" to Icons.Default.Pets,
-        "drink" to Icons.Default.LocalDrink,
-
-        // F
-        "family" to Icons.Default.FamilyRestroom,
-        "food" to Icons.Default.RestaurantMenu,
-        "friend" to Icons.Default.Group,
-
-        // G
-        "game" to Icons.Default.SportsEsports,
-
-        // H
-        "hospital" to Icons.Default.LocalHospital,
-        "house" to Icons.Default.Home,
-        "hotel" to Icons.Default.Hotel,
-
-        // I
-        "ice cream" to Icons.Default.Icecream,
-        "idea" to Icons.Default.Lightbulb,
-
-        // L
-        "language" to Icons.Default.Language,
-
-        // M
-        "manager" to Icons.Default.SupervisorAccount,
-        "market" to Icons.Default.Storefront,
-        "meeting" to Icons.Default.EventNote,
-        "movie" to Icons.Default.Movie,
-        "music" to Icons.Default.MusicNote,
-
-        // N
-        "news" to Icons.Default.Article,
-        "night" to Icons.Default.NightsStay,
-        "nurse" to Icons.Default.HealthAndSafety,
-
-        // O
-        "office" to Icons.Default.Business,
-
-        // P
-        "paper" to Icons.Default.Description,
-        "park" to Icons.Default.Park,
-        "pen" to Icons.Default.Edit,
-        "phone" to Icons.Default.Phone,
-        "plan" to Icons.Default.Assignment,
-        "problem" to Icons.Default.ReportProblem,
-
-        // Q
-        "question" to Icons.Default.HelpOutline,
-
-        // R
-        "restaurant" to Icons.Default.Restaurant,
-
-        // S
-        "school" to Icons.Default.School,
-        "shop" to Icons.Default.Store,
-        "station" to Icons.Default.Train,
-        "student" to Icons.Default.School,
-
-        // T
-        "team" to Icons.Default.Groups,
-        "ticket" to Icons.Default.ConfirmationNumber,
-        "time" to Icons.Default.AccessTime,
-        "train" to Icons.Default.DirectionsTransit,
-
-        // W
-        "water" to Icons.Default.Opacity,
-        "weather" to Icons.Default.WbSunny
+    data class WordMedia(
+        val listIcon: ImageVector,
+        val detail: DetailMedia
     )
 
+    val wordMediaMap: Map<String, WordMedia> = mapOf(
+        // A
+        "airplane" to WordMedia(Icons.Default.Flight, DetailMedia.Rive(R.raw.airplane)),
+
+        // B
+        "bag" to WordMedia(Icons.Default.Work, DetailMedia.Image(R.drawable.bag)),
+        "book" to WordMedia(Icons.Default.MenuBook, DetailMedia.Rive(R.raw.book)),
+        "bus" to WordMedia(Icons.Default.DirectionsBus, DetailMedia.Rive(R.raw.bus)),
+
+        // C
+        "cake" to WordMedia(Icons.Default.Cake, DetailMedia.Rive(R.raw.cute_cake)),
+        "car" to WordMedia(Icons.Default.DirectionsCar, DetailMedia.Rive(R.raw.car)),
+        "chair" to WordMedia(Icons.Default.EventSeat, DetailMedia.Image(R.drawable.chair)),
+        "child" to WordMedia(Icons.Default.ChildCare, DetailMedia.Image(R.drawable.child)),
+        "coffee" to WordMedia(Icons.Default.LocalCafe, DetailMedia.Rive(R.raw.coffee)),
+        "computer" to WordMedia(Icons.Default.Computer, DetailMedia.Image(R.drawable.computer)),
+
+        // D
+        "day" to WordMedia(Icons.Default.Today, DetailMedia.Rive(R.raw.day)),
+        "doctor" to WordMedia(Icons.Default.MedicalServices, DetailMedia.Rive(R.raw.doctor)),
+        "dog" to WordMedia(Icons.Default.Pets, DetailMedia.Rive(R.raw.dog)),
+        "drink" to WordMedia(Icons.Default.LocalDrink, DetailMedia.Rive(R.raw.drink)),
+
+        // F
+        "family" to WordMedia(Icons.Default.FamilyRestroom, DetailMedia.Rive(R.raw.airplane)),
+        "food" to WordMedia(Icons.Default.RestaurantMenu, DetailMedia.Rive(R.raw.airplane)),
+        "friend" to WordMedia(Icons.Default.Group, DetailMedia.Rive(R.raw.airplane)),
+
+        // G
+        "game" to WordMedia(Icons.Default.SportsEsports, DetailMedia.Rive(R.raw.airplane)),
+
+        // H
+        "hospital" to WordMedia(Icons.Default.LocalHospital, DetailMedia.Rive(R.raw.airplane)),
+        "house" to WordMedia(Icons.Default.Home, DetailMedia.Rive(R.raw.airplane)),
+        "hotel" to WordMedia(Icons.Default.Hotel, DetailMedia.Rive(R.raw.airplane)),
+
+        // I
+        "ice cream" to WordMedia(Icons.Default.Icecream, DetailMedia.Rive(R.raw.airplane)),
+        "idea" to WordMedia(Icons.Default.Lightbulb, DetailMedia.Rive(R.raw.airplane)),
+
+        // L
+        "language" to WordMedia(Icons.Default.Language, DetailMedia.Rive(R.raw.airplane)),
+
+        // M
+        "manager" to WordMedia(Icons.Default.SupervisorAccount, DetailMedia.Rive(R.raw.airplane)),
+        "market" to WordMedia(Icons.Default.Storefront, DetailMedia.Rive(R.raw.airplane)),
+        "meeting" to WordMedia(Icons.Default.EventNote, DetailMedia.Rive(R.raw.airplane)),
+        "movie" to WordMedia(Icons.Default.Movie, DetailMedia.Rive(R.raw.airplane)),
+        "music" to WordMedia(Icons.Default.MusicNote, DetailMedia.Rive(R.raw.airplane)),
+
+        // N
+        "news" to WordMedia(Icons.Default.Article, DetailMedia.Rive(R.raw.airplane)),
+        "night" to WordMedia(Icons.Default.NightsStay, DetailMedia.Rive(R.raw.airplane)),
+        "nurse" to WordMedia(Icons.Default.HealthAndSafety, DetailMedia.Rive(R.raw.airplane)),
+
+        // O
+        "office" to WordMedia(Icons.Default.Business, DetailMedia.Rive(R.raw.airplane)),
+
+        // P
+        "paper" to WordMedia(Icons.Default.Description, DetailMedia.Rive(R.raw.airplane)),
+        "park" to WordMedia(Icons.Default.Park, DetailMedia.Rive(R.raw.airplane)),
+        "pen" to WordMedia(Icons.Default.Edit, DetailMedia.Rive(R.raw.airplane)),
+        "phone" to WordMedia(Icons.Default.Phone, DetailMedia.Rive(R.raw.airplane)),
+        "plan" to WordMedia(Icons.Default.Assignment, DetailMedia.Rive(R.raw.airplane)),
+        "problem" to WordMedia(Icons.Default.ReportProblem, DetailMedia.Rive(R.raw.airplane)),
+
+        // Q
+        "question" to WordMedia(Icons.Default.HelpOutline, DetailMedia.Rive(R.raw.airplane)),
+
+        // R
+        "restaurant" to WordMedia(Icons.Default.Restaurant, DetailMedia.Rive(R.raw.airplane)),
+
+        // S
+        "school" to WordMedia(Icons.Default.School, DetailMedia.Rive(R.raw.airplane)),
+        "shop" to WordMedia(Icons.Default.Store, DetailMedia.Rive(R.raw.airplane)),
+        "station" to WordMedia(Icons.Default.Train, DetailMedia.Rive(R.raw.airplane)),
+        "student" to WordMedia(Icons.Default.School, DetailMedia.Rive(R.raw.airplane)),
+
+        // T
+        "team" to WordMedia(Icons.Default.Groups, DetailMedia.Rive(R.raw.airplane)),
+        "ticket" to WordMedia(Icons.Default.ConfirmationNumber, DetailMedia.Rive(R.raw.airplane)),
+        "time" to WordMedia(Icons.Default.AccessTime, DetailMedia.Rive(R.raw.airplane)),
+        "train" to WordMedia(Icons.Default.DirectionsTransit, DetailMedia.Rive(R.raw.airplane)),
+
+        // W
+        "water" to WordMedia(Icons.Default.Opacity, DetailMedia.Rive(R.raw.airplane)),
+        "weather" to WordMedia(Icons.Default.WbSunny, DetailMedia.Rive(R.raw.airplane))
+    )
     val SEED = listOf(
         // A
         Word(1, "airplane", "飛行機", "The airplane takes off.", "飛行機が離陸します。"),

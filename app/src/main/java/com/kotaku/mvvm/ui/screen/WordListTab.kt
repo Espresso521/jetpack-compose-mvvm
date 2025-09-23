@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.kotaku.mvvm.model.Word
-import com.kotaku.mvvm.ui.icons.IconCatalog.wordIconMap
+import com.kotaku.mvvm.ui.icons.IconCatalog
 import kotlin.math.absoluteValue
 
 @Composable
@@ -64,11 +64,11 @@ private fun WordRow(
 
     ListItem(
         leadingContent = {
-            val icon = wordIconMap[headline.lowercase()]
+            val icon = IconCatalog.wordMediaMap[headline.lowercase()]
             if (icon != null) {
                 // 如果有对应 Icon
                 Icon(
-                    imageVector = icon,
+                    imageVector = icon.listIcon,
                     contentDescription = headline,
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(32.dp)

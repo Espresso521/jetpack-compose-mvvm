@@ -11,8 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.kotaku.mvvm.R
-import com.kotaku.mvvm.ui.screen.DetailMedia
+import com.kotaku.mvvm.ui.icons.IconCatalog
 import com.kotaku.mvvm.ui.screen.DetailScreen
 import com.kotaku.mvvm.ui.screen.HomeScreen
 import com.kotaku.mvvm.ui.screen.LoginScreen
@@ -89,11 +88,14 @@ fun AppNav(
         ) { backStackEntry ->
             val id = backStackEntry.arguments?.getInt("id") ?: return@composable
             val word by wordsVm.wordFlow(id).collectAsState(initial = null)
+            val media = word?.let { w ->
+                IconCatalog.wordMediaMap[w.term.lowercase()]?.detail
+            }
             DetailScreen(
                 word = word,
                 onBack = { nav.popBackStack() },
                 onToggleFavorite = { wordsVm.toggleFavorite(id) },
-                media = DetailMedia.Rive(R.raw.car)
+                media = media
             )
         }
     }
