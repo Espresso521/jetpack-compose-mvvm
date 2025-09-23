@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.kotaku.mvvm.model.Word
+import com.kotaku.mvvm.ui.icons.IconCatalog.wordIconMap
 import kotlin.math.absoluteValue
 
 @Composable
@@ -63,22 +64,32 @@ private fun WordRow(
 
     ListItem(
         leadingContent = {
-            // 圆形首字母头像（颜色基于单词稳定生成）
-            val bg = avatarColorFor(headline)
-            Surface(
-                color = bg.copy(alpha = 0.18f),
-                shape = CircleShape
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(44.dp),
-                    contentAlignment = Alignment.Center
+            val icon = wordIconMap[headline.lowercase()]
+            if (icon != null) {
+                // 如果有对应 Icon
+                Icon(
+                    imageVector = icon,
+                    contentDescription = headline,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(32.dp)
+                )
+            } else {
+                // fallback → 首字母圆形头像
+                val bg = avatarColorFor(headline)
+                Surface(
+                    color = bg.copy(alpha = 0.18f),
+                    shape = CircleShape
                 ) {
-                    Text(
-                        text = headline.take(1).uppercase(),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = bg
-                    )
+                    Box(
+                        modifier = Modifier.size(44.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = headline.take(1).uppercase(),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = bg
+                        )
+                    }
                 }
             }
         },
