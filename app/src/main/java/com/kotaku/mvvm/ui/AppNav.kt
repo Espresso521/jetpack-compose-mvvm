@@ -11,11 +11,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.kotaku.mvvm.model.Word
 import com.kotaku.mvvm.ui.icons.IconCatalog
+import com.kotaku.mvvm.ui.screen.DetailMedia
 import com.kotaku.mvvm.ui.screen.DetailScreen
 import com.kotaku.mvvm.ui.screen.HomeScreen
 import com.kotaku.mvvm.ui.screen.LoginScreen
 import com.kotaku.mvvm.ui.screen.SplashScreen
+import com.kotaku.mvvm.ui.screen.WordDetailPagerScreen
 import com.kotaku.mvvm.vm.HomeViewModel
 import com.kotaku.mvvm.vm.WordsViewModel
 
@@ -24,6 +27,7 @@ object Routes {
     const val Login = "login"
     const val Home = "home"
     const val Detail = "detail"
+    const val DetailPager = "detailpager"
     fun detail(id: Int) = "$Detail/$id"
 }
 
@@ -74,7 +78,7 @@ fun AppNav(
                 wordsVm = wordsVm,
                 // 打开详情页：跳转路由并携带 id
                 onOpenDetail = { id ->
-                    nav.navigate("${Routes.Detail}/$id")
+                    nav.navigate("${Routes.DetailPager}/$id")
                 },
                 // 登出：清理登录态并回到登录页
                 onLogout = { homeVm.logout() },
@@ -96,6 +100,29 @@ fun AppNav(
                 onBack = { nav.popBackStack() },
                 onToggleFavorite = { wordsVm.toggleFavorite(id) },
                 media = media
+            )
+        }
+
+        composable(
+            route = "${Routes.DetailPager}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getInt("id") ?: return@composable
+
+            // 拿到全量 words（用你的 ViewModel）
+            val allWords by wordsVm.words.collectAsState(initial = emptyList())
+
+            // 你的 wordIconMap 映射器（示例：全部给默认 Rive，后面你再按词目替换）
+            val mediaFor: (Word) -> DetailMedia? = { word ->
+                IconCatalog.wordMediaMap[word.term.lowercase()]?.detail
+            }
+
+            WordDetailPagerScreen(
+                words = allWords,
+                initialWordId = id,
+                onBack = { nav.popBackStack() },
+                onToggleFavorite = { wordsVm.toggleFavorite(it) },
+                mediaFor = mediaFor
             )
         }
     }
