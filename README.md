@@ -8,7 +8,7 @@
 
 ## 🎬 デモ
 
-![Demo](./readme/output.gif)
+![Demo](./readme/output1.gif)
 
 ---
 
