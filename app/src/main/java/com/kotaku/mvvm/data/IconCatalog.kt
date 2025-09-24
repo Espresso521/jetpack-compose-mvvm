@@ -21,7 +21,6 @@ import androidx.compose.material.icons.filled.Flight
 import androidx.compose.material.icons.filled.Group
 import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.HealthAndSafety
-import androidx.compose.material.icons.filled.HelpOutline
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Hotel
 import androidx.compose.material.icons.filled.Icecream
@@ -44,7 +43,6 @@ import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.RestaurantMenu
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.SportsEsports
-import androidx.compose.material.icons.filled.Store
 import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material.icons.filled.SupervisorAccount
 import androidx.compose.material.icons.filled.Today
@@ -87,69 +85,74 @@ object IconCatalog {
         "drink" to WordMedia(Icons.Default.LocalDrink, DetailMedia.Rive(R.raw.drink)),
 
         // F
-        "family" to WordMedia(Icons.Default.FamilyRestroom, DetailMedia.Rive(R.raw.airplane)),
-        "food" to WordMedia(Icons.Default.RestaurantMenu, DetailMedia.Rive(R.raw.airplane)),
-        "friend" to WordMedia(Icons.Default.Group, DetailMedia.Rive(R.raw.airplane)),
+        "family" to WordMedia(Icons.Default.FamilyRestroom, DetailMedia.Image(R.drawable.family)),
+        "food" to WordMedia(Icons.Default.RestaurantMenu, DetailMedia.Image(R.drawable.food)),
+        "friend" to WordMedia(Icons.Default.Group, DetailMedia.Image(R.drawable.friend)),
 
         // G
-        "game" to WordMedia(Icons.Default.SportsEsports, DetailMedia.Rive(R.raw.airplane)),
+        "game" to WordMedia(Icons.Default.SportsEsports, DetailMedia.Rive(R.raw.game)),
 
         // H
-        "hospital" to WordMedia(Icons.Default.LocalHospital, DetailMedia.Rive(R.raw.airplane)),
-        "house" to WordMedia(Icons.Default.Home, DetailMedia.Rive(R.raw.airplane)),
-        "hotel" to WordMedia(Icons.Default.Hotel, DetailMedia.Rive(R.raw.airplane)),
+        "hospital" to WordMedia(Icons.Default.LocalHospital, DetailMedia.Rive(R.raw.hospital)),
+        "house" to WordMedia(Icons.Default.Home, DetailMedia.Image(R.drawable.house)),
+        "hotel" to WordMedia(Icons.Default.Hotel, DetailMedia.Rive(R.raw.hotel)),
 
         // I
-        "ice cream" to WordMedia(Icons.Default.Icecream, DetailMedia.Rive(R.raw.airplane)),
-        "idea" to WordMedia(Icons.Default.Lightbulb, DetailMedia.Rive(R.raw.airplane)),
+        "ice cream" to WordMedia(Icons.Default.Icecream, DetailMedia.Image(R.drawable.icecream)),
+        "idea" to WordMedia(Icons.Default.Lightbulb, DetailMedia.Image(R.drawable.idea)),
 
         // L
-        "language" to WordMedia(Icons.Default.Language, DetailMedia.Rive(R.raw.airplane)),
+        "language" to WordMedia(Icons.Default.Language, DetailMedia.Image(R.drawable.language)),
 
         // M
-        "manager" to WordMedia(Icons.Default.SupervisorAccount, DetailMedia.Rive(R.raw.airplane)),
-        "market" to WordMedia(Icons.Default.Storefront, DetailMedia.Rive(R.raw.airplane)),
-        "meeting" to WordMedia(Icons.Default.EventNote, DetailMedia.Rive(R.raw.airplane)),
-        "movie" to WordMedia(Icons.Default.Movie, DetailMedia.Rive(R.raw.airplane)),
-        "music" to WordMedia(Icons.Default.MusicNote, DetailMedia.Rive(R.raw.airplane)),
+        "manager" to WordMedia(
+            Icons.Default.SupervisorAccount,
+            DetailMedia.Image(R.drawable.manager)
+        ),
+        "market" to WordMedia(Icons.Default.Storefront, DetailMedia.Image(R.drawable.market)),
+        "meeting" to WordMedia(Icons.Default.EventNote, DetailMedia.Image(R.drawable.meeting)),
+        "movie" to WordMedia(Icons.Default.Movie, DetailMedia.Image(R.drawable.movie)),
+        "music" to WordMedia(Icons.Default.MusicNote, DetailMedia.Rive(R.raw.music)),
 
         // N
-        "news" to WordMedia(Icons.Default.Article, DetailMedia.Rive(R.raw.airplane)),
-        "night" to WordMedia(Icons.Default.NightsStay, DetailMedia.Rive(R.raw.airplane)),
-        "nurse" to WordMedia(Icons.Default.HealthAndSafety, DetailMedia.Rive(R.raw.airplane)),
+        "news" to WordMedia(Icons.Default.Article, DetailMedia.Image(R.drawable.news)),
+        "night" to WordMedia(Icons.Default.NightsStay, DetailMedia.Image(R.drawable.night)),
+        "nurse" to WordMedia(Icons.Default.HealthAndSafety, DetailMedia.Image(R.drawable.nurse)),
 
         // O
-        "office" to WordMedia(Icons.Default.Business, DetailMedia.Rive(R.raw.airplane)),
+        "office" to WordMedia(Icons.Default.Business, DetailMedia.Image(R.drawable.office)),
 
         // P
-        "paper" to WordMedia(Icons.Default.Description, DetailMedia.Rive(R.raw.airplane)),
-        "park" to WordMedia(Icons.Default.Park, DetailMedia.Rive(R.raw.airplane)),
-        "pen" to WordMedia(Icons.Default.Edit, DetailMedia.Rive(R.raw.airplane)),
-        "phone" to WordMedia(Icons.Default.Phone, DetailMedia.Rive(R.raw.airplane)),
-        "plan" to WordMedia(Icons.Default.Assignment, DetailMedia.Rive(R.raw.airplane)),
-        "problem" to WordMedia(Icons.Default.ReportProblem, DetailMedia.Rive(R.raw.airplane)),
-
-        // Q
-        "question" to WordMedia(Icons.Default.HelpOutline, DetailMedia.Rive(R.raw.airplane)),
+        "paper" to WordMedia(Icons.Default.Description, DetailMedia.Image(R.drawable.paper)),
+        "park" to WordMedia(Icons.Default.Park, DetailMedia.Image(R.drawable.park)),
+        "pen" to WordMedia(Icons.Default.Edit, DetailMedia.Rive(R.raw.pen)),
+        "phone" to WordMedia(Icons.Default.Phone, DetailMedia.Image(R.drawable.phone)),
+        "plan" to WordMedia(Icons.Default.Assignment, DetailMedia.Image(R.drawable.plan)),
+        "problem" to WordMedia(Icons.Default.ReportProblem, DetailMedia.Image(R.drawable.problem)),
 
         // R
-        "restaurant" to WordMedia(Icons.Default.Restaurant, DetailMedia.Rive(R.raw.airplane)),
+        "restaurant" to WordMedia(
+            Icons.Default.Restaurant,
+            DetailMedia.Image(R.drawable.restaurant)
+        ),
 
         // S
-        "school" to WordMedia(Icons.Default.School, DetailMedia.Rive(R.raw.airplane)),
-        "shop" to WordMedia(Icons.Default.Store, DetailMedia.Rive(R.raw.airplane)),
-        "station" to WordMedia(Icons.Default.Train, DetailMedia.Rive(R.raw.airplane)),
-        "student" to WordMedia(Icons.Default.School, DetailMedia.Rive(R.raw.airplane)),
+        "school" to WordMedia(Icons.Default.School, DetailMedia.Image(R.drawable.school)),
+        "station" to WordMedia(Icons.Default.Train, DetailMedia.Rive(R.raw.station)),
+        "student" to WordMedia(Icons.Default.School, DetailMedia.Image(R.drawable.students)),
 
         // T
-        "team" to WordMedia(Icons.Default.Groups, DetailMedia.Rive(R.raw.airplane)),
-        "ticket" to WordMedia(Icons.Default.ConfirmationNumber, DetailMedia.Rive(R.raw.airplane)),
-        "time" to WordMedia(Icons.Default.AccessTime, DetailMedia.Rive(R.raw.airplane)),
-        "train" to WordMedia(Icons.Default.DirectionsTransit, DetailMedia.Rive(R.raw.airplane)),
+        "team" to WordMedia(Icons.Default.Groups, DetailMedia.Image(R.drawable.team)),
+        "ticket" to WordMedia(
+            Icons.Default.ConfirmationNumber,
+            DetailMedia.Image(R.drawable.ticket)
+        ),
+        "time" to WordMedia(Icons.Default.AccessTime, DetailMedia.Rive(R.raw.time)),
+        "train" to WordMedia(Icons.Default.DirectionsTransit, DetailMedia.Image(R.drawable.train)),
 
         // W
-        "water" to WordMedia(Icons.Default.Opacity, DetailMedia.Rive(R.raw.airplane)),
-        "weather" to WordMedia(Icons.Default.WbSunny, DetailMedia.Rive(R.raw.airplane))
+        "water" to WordMedia(Icons.Default.Opacity, DetailMedia.Rive(R.raw.water)),
+        "weather" to WordMedia(Icons.Default.WbSunny, DetailMedia.Rive(R.raw.weather))
     )
     val SEED = listOf(
         // A
@@ -241,9 +244,6 @@ object IconCatalog {
         Word(40, "plan", "計画", "The plan is perfect.", "その計画は完璧です。"),
         Word(41, "problem", "問題", "This is a big problem.", "これは大きな問題です。"),
 
-        // Q
-        Word(42, "question", "質問", "I have a question.", "質問があります。"),
-
         // R
         Word(
             43,
@@ -255,7 +255,6 @@ object IconCatalog {
 
         // S
         Word(44, "school", "学校", "The school opens at 8 a.m.", "学校は午前8時に始まります。"),
-        Word(45, "shop", "店", "The shop is closed.", "店は閉まっています。"),
         Word(46, "station", "駅", "The station is near.", "駅は近いです。"),
         Word(47, "student", "学生", "The student studies hard.", "その学生はよく勉強します。"),
 
